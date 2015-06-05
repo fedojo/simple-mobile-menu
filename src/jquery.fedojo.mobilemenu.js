@@ -52,8 +52,11 @@
 
 			if (parentLi.find('ul').length > 0) {
 				e.preventDefault();
-
-				_arrayOfClicks[$(e.currentTarget).parents('ul').length-1] = $(e.currentTarget).parent().index();
+				var position = $(e.currentTarget).parents('ul').length - 1,
+			            value = $(e.currentTarget).parent().index();
+			        
+			        _arrayOfClicks[position] = value;
+				//_arrayOfClicks[$(e.currentTarget).parents('ul').length-1] = $(e.currentTarget).parent().index();
 
  				console.log(_arrayOfClicks);
 
