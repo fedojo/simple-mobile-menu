@@ -40,6 +40,10 @@
 
 		// console.log(_arrayOfClicks);
 
+// $().querySelector('').addEventListener('Click', clickListener);
+// clickListener = function(e) {...}
+// 
+
 		$(this).find('a').on( 'click', function(e) {
 			var parentLi = $(e.currentTarget).parent();
 
@@ -56,6 +60,7 @@
  			}
  			else {
 				setLS('mmarray', JSON.stringify(_arrayOfClicks));
+// ser fallback for LocalStorage - cookies
  			}
  		});
 
