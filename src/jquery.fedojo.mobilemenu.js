@@ -1,22 +1,4 @@
 (function($) {
-	function setCookie(cname, cvalue, exdays, domain) {
-		var d = new Date();
-		d.setTime(d.getTime() + (exdays*24*60*60*1000));
-		var expires = "expires="+d.toUTCString();
-		document.cookie = cname + "=" + cvalue + "; " + expires+"; domain="+domain;
-	}
-
-	function getCookie(cname) {
-		var name = cname + "=";
-		var ca = document.cookie.split(';');
-		for(var i=0; i<ca.length; i++) {
-			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1);
-			if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-		}
-		return "";
-	}
-
 	function setLS(name, value){
 		window.localStorage.setItem(name, value);
 	}
@@ -67,11 +49,6 @@
 (function($){
 	$('document').ready(function() {
 
-		$( "nav a" ).each(function(){
-
-			$(this).parent().find('ul').length>0 ? $(this).addClass('hasChild') : null;
-			// console.log($(this).parent().find('ul').length);
-		})
 		$('nav').simbleMobileMenu();
 	});
 })(jQuery);
