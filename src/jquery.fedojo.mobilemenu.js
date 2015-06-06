@@ -25,7 +25,7 @@
 		return window.localStorage.getItem(name);
 	}
 
-	$.fn.simbleMobileMenu = function() {
+	$.fn.simpleMobileMenu = function() {
 		console.log("go");
 		var _arrayOfClicks = getLS('mmarray') ? JSON.parse(getLS('mmarray')) : [],
 		_menu = $(this);
@@ -80,6 +80,6 @@
 			$(this).parent().find('ul').length>0 ? $(this).addClass('hasChild') : null;
 			// console.log($(this).parent().find('ul').length);
 		})
-		$('nav').simbleMobileMenu();
+		$('nav').simpleMobileMenu();
 	});
 })(jQuery);
