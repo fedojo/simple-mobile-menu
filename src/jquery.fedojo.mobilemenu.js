@@ -7,34 +7,39 @@
 		return window.localStorage.getItem(name);
 	}
 
-	$.fn.simbleMobileMenu = function() {
-		console.log("go");
+	$.fn.simpleMobileMenu = function() {
 		var _arrayOfClicks = getLS('mmarray') ? JSON.parse(getLS('mmarray')) : [],
-		_menu = $(this);
+			_menu = $(this);
+			_currentLevel = 0;
 
-		console.log(_arrayOfClicks);
+			_menu.find( "a" ).each(function(){
+				$(this).parent().find('ul').length>0 ? $(this).parent().addClass('hasChild') : null;
+			})
 
 		if (_arrayOfClicks.length > 0) {
-			_arrayOfClicks.forEach(function(element) {
-				_menu.find("> ul > ul").eq(element).show();
-			});
-		}
+			var ulstring = '> ul ';
 
-		// console.log(_arrayOfClicks);
+			for (var i=0; i<_arrayOfClicks.length; i++) {
+					ulstring +='> li:eq('+_arrayOfClicks[i]+') ';
+
+				el = _menu.find(ulstring);
+				el.addClass('active');
+
+				ulstring += '> ul ';
+			}
+		}
 
 		$(this).find('a').on( 'click', function(e) {
 			var parentLi = $(e.currentTarget).parent();
 
-			parentLi.hasClass('active') ? parentLi.removeClass('active') : parentLi.addClass('active');
-			console.log("len: "+parentLi.length);
-
-			if (parentLi.find('ul').length > 0) {
+			if (parentLi.hasClass('hasChild')) {
 				e.preventDefault();
+				var position = $(e.currentTarget).parents('ul').length - 1,
+            value = $(e.currentTarget).parent().index();
 
-				_arrayOfClicks[$(e.currentTarget).parents('ul').length-1] = $(e.currentTarget).parent().index();
+				parentLi.hasClass('active') ? parentLi.removeClass('active') : parentLi.addClass('active');
 
- 				console.log(_arrayOfClicks);
-
+	      _arrayOfClicks[position] = value;
  			}
  			else {
 				setLS('mmarray', JSON.stringify(_arrayOfClicks));
@@ -48,7 +53,6 @@
 
 (function($){
 	$('document').ready(function() {
-
-		$('nav').simbleMobileMenu();
+		$('nav').simpleMobileMenu();
 	});
 })(jQuery);
