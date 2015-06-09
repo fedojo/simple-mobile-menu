@@ -7,10 +7,14 @@
 		return window.localStorage.getItem(name);
 	}
 
-	$.fn.simpleMobileMenu = function() {
+	$.fn.simpleMobileMenu = function(settingsObj) {
 		var _arrayOfClicks = getLS('mmarray') ? JSON.parse(getLS('mmarray')) : [],
-			_menu = $(this);
+			_menu = $(this),
 			_currentLevel = 0;
+
+		if (settingsObj) {
+			
+		}
 
 			_menu.find( "a" ).each(function(){
 				$(this).parent().find('ul').length>0 ? $(this).parent().addClass('hasChild') : null;
