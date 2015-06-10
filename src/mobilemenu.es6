@@ -1,15 +1,13 @@
 class MobileMenu {
-  // $element: {};
-  // $a: {}};
-  // configObj: {};
-
+  clicksArray: array;
 
   constructor(el, configObj) {
     this.$element = el;
     this.$a = this.$element.getElementsByTagName('a');
     this.configObj = configObj;
 
-    this.parseConfig();
+    this.parseConfig(configObj);
+    this.checkMenuStatus();
     this.bindEvents();
 
     console.log("MobileMenu");
@@ -17,18 +15,19 @@ class MobileMenu {
 
   bindEvents () {
     var $a = this.$element.getElementsByTagName('a');
-    console.log($a);
 
-    for (var i=0; i<$a.length-1 ; i++) {
-      $a[i].addEventListener( "click", (event) => this.clickHandler() );
-    }
-
+    this.$element.addEventListener('click', this.clickHandler);
   }
 
-  parseConfig() {
-
+  checkMenuStatus() {
+    console.log(this.getValue('mmarray'));
   }
 
+  parseConfig(cfg) {
+    console.log("Config");
+    console.log(cfg);
+    // TODO
+  }
 
   setValue(name, value) {
     window.localStorage.setItem(name, value);
@@ -39,7 +38,20 @@ class MobileMenu {
   }
 
   clickHandler(e) {
-    e.preventDefault();
-    console.log('click');
+
+    var $target = e.target,
+        $parent = $target.parentNode,
+        $childUl = $parent.querySelector('ul');
+
+
+    if ($childUl != null) {
+      e.preventDefault();
+      ($parent.className.split(' ').indexOf('active')>0) ?  $parent.className = "" : $parent.className = 'active';
+      this.clicksArray[0] = 0;
+      console.log(this.clicksArray);
+    }
+    else {
+
+    }
   }
 }
