@@ -36,6 +36,7 @@ var MobileMenu = (function () {
     value: function parseConfig(cfg) {
       console.log('Config');
       console.log(cfg);
+
       // TODO
     }
   }, {
@@ -58,8 +59,7 @@ var MobileMenu = (function () {
 
       if ($childUl != null) {
         e.preventDefault();
-        $parent.className.split(' ').indexOf('active') > 0 ? $parent.className = '' : $parent.className = 'active';
-        this.clicksArray[0] = 0;
+        // this.clicksArray[0] = 0;
         console.log(this.clicksArray);
       } else {}
     }
@@ -67,3 +67,5 @@ var MobileMenu = (function () {
 
   return MobileMenu;
 })();
+
+//# sourceMappingURL=mobilemenu.js.map
