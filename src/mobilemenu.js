@@ -34,9 +34,12 @@ var MobileMenu = (function () {
   }, {
     key: 'parseConfig',
     value: function parseConfig(cfg) {
-      console.log('Config');
-      console.log(cfg);
-      // TODO
+      var defaultCfg = {
+        rememberStatus: 'true'
+      };
+
+      this.configObj = cfg ? cfg : defaultCfg;
+      console.log(this.configObj);
     }
   }, {
     key: 'setValue',
@@ -51,19 +54,19 @@ var MobileMenu = (function () {
   }, {
     key: 'clickHandler',
     value: function clickHandler(e) {
-
       var $target = e.target,
           $parent = $target.parentNode,
           $childUl = $parent.querySelector('ul');
 
       if ($childUl != null) {
         e.preventDefault();
-        $parent.className.split(' ').indexOf('active') > 0 ? $parent.className = '' : $parent.className = 'active';
-        this.clicksArray[0] = 0;
-        console.log(this.clicksArray);
+        // ($parent.classList.contains('active')) ? $parent.class = '' : $parent.class = 'active';
+        $parent.classList.contains('active') ? $parent.classList.remove('active') : $parent.classList.add('active'); // >IE10
       } else {}
     }
   }]);
 
   return MobileMenu;
 })();
+
+//# sourceMappingURL=mobilemenu.js.map
