@@ -1,9 +1,13 @@
+import * as dom from "lib/dom";
+
 class MobileMenu {
   clicksArray: array;
+
 
   constructor(el, configObj) {
     this.$element = el;
     this.$a = this.$element.getElementsByTagName('a');
+
     this.configObj = configObj;
 
     this.parseConfig(configObj);
@@ -24,10 +28,18 @@ class MobileMenu {
   }
 
   parseConfig(cfg) {
+
     console.log("Config");
     console.log(cfg);
 
     // TODO
+    var defaultCfg = {
+        rememberStatus: 'true'
+    };
+
+    this.configObj = (cfg ? cfg : defaultCfg);
+    console.log(this.configObj);
+
   }
 
   setValue(name, value) {
@@ -39,16 +51,26 @@ class MobileMenu {
   }
 
   clickHandler(e) {
-
     var $target = e.target,
         $parent = $target.parentNode,
-        $childUl = $parent.querySelector('ul');
-
+        $childUl = $parent.querySelector('ul')
+        ;
 
     if ($childUl != null) {
       e.preventDefault();
-      // this.clicksArray[0] = 0;
-      console.log(this.clicksArray);
+
+      console.log( typeof(this.clicksArray) );
+      //
+
+      // >IE10
+      // if (typeof($parent.classList) != undefined) {
+        // ($parent.classList.contains('active')) ? $parent.classList.remove('active') : $parent.classList.add('active');
+      // }
+      // else {
+        ($parent.className.split(' ').indexOf('active')>0) ? dom.removeClass($parent, 'active') : dom.addClass($parent, 'active');
+      // }
+
+
     }
     else {
 
