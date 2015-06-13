@@ -1,20 +1,24 @@
-import * as dom from "lib/dom";
+import * as dom from "lib/DOM";
+import * as ls from "lib/LS";
 
-class MobileMenu {
+
+export class MobileMenu {
   clicksArray: array;
+  $element: {};
 
-
+  // constructor() {
   constructor(el, configObj) {
-    this.$element = el;
-    this.$a = this.$element.getElementsByTagName('a');
+    console.log("MobileMenu");
 
+    this.$element = el;
+    // this.$a = this.$element.getElementsByTagName('a');
+    console.log(this.$element);
     this.configObj = configObj;
 
     this.parseConfig(configObj);
     this.checkMenuStatus();
     this.bindEvents();
 
-    console.log("MobileMenu");
   }
 
   bindEvents () {
@@ -28,7 +32,6 @@ class MobileMenu {
   }
 
   parseConfig(cfg) {
-
     console.log("Config");
     console.log(cfg);
 
@@ -67,7 +70,13 @@ class MobileMenu {
         // ($parent.classList.contains('active')) ? $parent.classList.remove('active') : $parent.classList.add('active');
       // }
       // else {
+
+
+
         ($parent.className.split(' ').indexOf('active')>0) ? dom.removeClass($parent, 'active') : dom.addClass($parent, 'active');
+
+
+
       // }
 
 

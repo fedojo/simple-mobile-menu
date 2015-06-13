@@ -5,5 +5,5 @@ Mobile menu jQuery plugin with localStorage memory of revealed submenu.
 http://dev.fedojo.com/simple-mobile-menu
 
 
-##Fast compilation
-babel mobilemenu.es6 --watch --out-file mobilemenu.js
+##Fast compilation in src_es6 folder
+babel es6 --out-dir js -w -s --modules amd
