@@ -1,3 +1,5 @@
+
+
 export function setLS(name, value){
   window.localStorage.setItem(name, value);
 }

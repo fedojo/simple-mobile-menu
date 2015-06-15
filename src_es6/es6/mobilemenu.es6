@@ -8,17 +8,12 @@ export class MobileMenu {
 
   // constructor() {
   constructor(el, configObj) {
-    console.log("MobileMenu");
-
     this.$element = el;
-    // this.$a = this.$element.getElementsByTagName('a');
-    console.log(this.$element);
     this.configObj = configObj;
 
     this.parseConfig(configObj);
-    this.checkMenuStatus();
+    this.setActiveElements();
     this.bindEvents();
-
   }
 
   bindEvents () {
@@ -27,13 +22,24 @@ export class MobileMenu {
     this.$element.addEventListener('click', this.clickHandler);
   }
 
-  checkMenuStatus() {
-    console.log(this.getValue('mmarray'));
+  setActiveElements() {
+    this.clicksArray = (window.localStorage.getItem('mmarray')) ? JSON.parse(window.localStorage.getItem('mmarray')) : [];
+
+    console.log(this.clicksArray);
+
+
+    if (this.clicksArray) {
+      this.clicksArray.map((el, index) => {
+        // this.$element.querySelector('ul > li')[index].className += "active";
+        console.log('EL: '+el+ ' ind: '+ index);
+      });
+    }
   }
 
   parseConfig(cfg) {
     console.log("Config");
     console.log(cfg);
+
 
     // TODO
     var defaultCfg = {
@@ -45,41 +51,20 @@ export class MobileMenu {
 
   }
 
-  setValue(name, value) {
-    window.localStorage.setItem(name, value);
-  }
-
-  getValue(name) {
-    return window.localStorage.getItem(name);
-  }
-
   clickHandler(e) {
     var $target = e.target,
         $parent = $target.parentNode,
-        $childUl = $parent.querySelector('ul')
-        ;
+        $childUl = $parent.querySelector('ul');
 
     if ($childUl != null) {
       e.preventDefault();
-
-      console.log( typeof(this.clicksArray) );
-      //
-
       // >IE10
       // if (typeof($parent.classList) != undefined) {
         // ($parent.classList.contains('active')) ? $parent.classList.remove('active') : $parent.classList.add('active');
       // }
       // else {
-
-
-
         ($parent.className.split(' ').indexOf('active')>0) ? dom.removeClass($parent, 'active') : dom.addClass($parent, 'active');
-
-
-
       // }
-
-
     }
     else {
 
